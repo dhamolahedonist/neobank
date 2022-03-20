@@ -23,10 +23,10 @@ const DB = {
     },
      phoneNumberAlreadyExist() {
 
-    }
+    },
     emailAddressAlreadyExist() {
 
-    }
+    },
     bvnAlreadyExist() {
     }
 }
