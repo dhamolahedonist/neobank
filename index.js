@@ -31,11 +31,6 @@ app.post('/api/create-virtual-account', function (request, response) {
 		phone: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
 	})
 
-    
-
-
-
-
 	const validation = schema.validate(request.body)
 	if(validation.error && validation.error.details.length > 0) {
 		return response.json({
@@ -47,17 +42,6 @@ app.post('/api/create-virtual-account', function (request, response) {
 
 	const account_number =  Math.floor(Math.random() * 9000000000) + 1000000000
     db.create(request.body, account_number)
-
-    phoneNumberAlreadyExist() {
-
-    }
-    emailAddressAlreadyExist() {
-
-    }
-    bvnAlreadyExist() {
-    }
-
-   
 
 	return response.json({
 		status: 'Successful',

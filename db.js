@@ -23,4 +23,14 @@ const DB = {
     }
 }
 
+
+    phoneNumberAlreadyExist() {
+
+    }
+    emailAddressAlreadyExist() {
+
+    }
+    bvnAlreadyExist() {
+    }
+
 module.exports = DB;
