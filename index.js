@@ -46,13 +46,17 @@ app.post('/api/create-virtual-account', function (request, response) {
 	}
 
 	const account_number =  Math.floor(Math.random() * 9000000000) + 1000000000
-    const { first_name, last_name, phone, email, address, bvn } = request.body
+    db.create(request.body, account_number)
 
-    db.promise().query(`
-    INSERT INTO virtual_accounts
-    (first_name, last_name, phone, email, address, account_number, bvn) 
-    VALUES ( '${first_name}', '${last_name}', '${phone}', '${email}', '${address}', '${account_number}', '${bvn}')
-    `)
+    phoneNumberAlreadyExist() {
+
+    }
+    emailAddressAlreadyExist() {
+
+    }
+    bvnAlreadyExist() {
+    }
+
    
 
 	return response.json({
