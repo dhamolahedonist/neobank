@@ -25,11 +25,16 @@ app.post('/api/create-virtual-account', function (request, response) {
 	const schema = Joi.object({
 		first_name: Joi.string().required(),
 		last_name: Joi.string().required(),
-        email: Joi.string().required(),
+        email: Joi.string().email().required(),
 		bvn: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
 		address: Joi.string().required(),
 		phone: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
 	})
+
+    
+
+
+
 
 	const validation = schema.validate(request.body)
 	if(validation.error && validation.error.details.length > 0) {
@@ -46,7 +51,9 @@ app.post('/api/create-virtual-account', function (request, response) {
     db.promise().query(`
     INSERT INTO virtual_accounts
     (first_name, last_name, phone, email, address, account_number, bvn) 
-    VALUES ( '${first_name}', '${last_name}', '${phone}', '${email}', '${address}', '${account_number}', '${bvn}')`)
+    VALUES ( '${first_name}', '${last_name}', '${phone}', '${email}', '${address}', '${account_number}', '${bvn}')
+    `)
+   
 
 	return response.json({
 		status: 'Successful',
