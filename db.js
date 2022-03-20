@@ -20,11 +20,8 @@ const DB = {
         (first_name, last_name, phone, email, address, account_number, bvn) 
         VALUES ( '${first_name}', '${last_name}', '${phone}', '${email}', '${address}', '${account_number}', '${bvn}')
         `)
-    }
-}
-
-
-    phoneNumberAlreadyExist() {
+    },
+     phoneNumberAlreadyExist() {
 
     }
     emailAddressAlreadyExist() {
@@ -32,5 +29,9 @@ const DB = {
     }
     bvnAlreadyExist() {
     }
+}
+
+
+   
 
 module.exports = DB;
