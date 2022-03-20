@@ -1,5 +1,6 @@
 const express = require('express')
 const Joi = require('joi')
+const db = require('./db')
 const app = express()
 
 app.use(express.json())
@@ -24,6 +25,7 @@ app.post('/api/create-virtual-account', function (request, response) {
 	const schema = Joi.object({
 		first_name: Joi.string().required(),
 		last_name: Joi.string().required(),
+        email: Joi.string().required(),
 		bvn: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
 		address: Joi.string().required(),
 		phone: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
@@ -38,12 +40,19 @@ app.post('/api/create-virtual-account', function (request, response) {
 		}, 400)
 	}
 
-	const accountNumber =  Math.floor(Math.random() * 9000000000) + 1000000000
+	const account_number =  Math.floor(Math.random() * 9000000000) + 1000000000
+    const { first_name, last_name, phone, email, address, bvn } = request.body
+
+    db.promise().query(`
+    INSERT INTO virtual_accounts
+    (first_name, last_name, phone, email, address, account_number, bvn) 
+    VALUES ( '${first_name}', '${last_name}', '${phone}', '${email}', '${address}', '${account_number}', '${bvn}')`)
+
 	return response.json({
 		status: 'Successful',
 		message: 'Account number generated successfully. An email has been sent to customer.',
 		data: {
-			account_number: accountNumber
+			account_number
 		}
 	})
 })
